@@ -162,8 +162,20 @@ class Zombie:
         return BehaviorTree.SUCCESS
 
 
-    def if_ball_count_zombie_boy(self):
-        pass
+    def if_ball_count_many_zombie(self):
+        if self.ball_count > common.boy.ball_count:
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.FAIL
+
+
+    def if_ball_count_many_boy(self):
+        if self.ball_count < common.boy.ball_count:
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.FAIL
+
+
 
 
     def build_behavior_tree(self):
@@ -193,7 +205,8 @@ class Zombie:
 
         '=================================================================================================='
 
-        c2 = Condition('소년보다 공이 많은가?', self.if_ball_count_zombie_boy)
+        c2 = Condition('소년보다 공이 많은가?', self.if_ball_count_many_zombie)
+        c3 = Condition('소년보다 공이 적은가?', self.if_ball_count_many_boy)
 
         a6 = Action('소년에게서 도망', self.run_away_boy)
 
