@@ -152,7 +152,15 @@ class Zombie:
 
 
     def run_away_boy(self, r=0.5):
-        pass
+        # 소년과 반대 방향으로 멀어지기
+        if common.boy.x < self.x and common.boy.y < self.y:
+            self.move_little_to(self.x + 100, self.y + 100)
+        elif common.boy.x >= self.x and common.boy.y < self.y:
+            self.move_little_to(self.x - 100, self.y + 100)
+        elif common.boy.x >= self.x and common.boy.y >= self.y:
+            self.move_little_to(self.x - 100, self.y - 100)
+        else:
+            self.move_little_to(self.x + 100, self.y - 100)
 
 
     def get_patrol_location(self):
@@ -211,7 +219,7 @@ class Zombie:
         a6 = Action('소년에게서 도망', self.run_away_boy)
 
         chase_if_boy_nearby_to_ball = Sequence('소년보다 공이 많으면 추적', c2, a4)
-        run_if_boy_nearby_to_ball = Sequence('소년보다 공이 적으면 도망', c1, a6)
+        run_if_boy_nearby_to_ball = Sequence('소년보다 공이 적으면 도망', c3, a6)
 
         chase_or_run_boy_if_nearby_selector = Selector('공의 개수에 따라 소년이 가까이 있으면 소년을 추적/도망', chase_if_boy_nearby_to_ball, run_if_boy_nearby_to_ball)
 
