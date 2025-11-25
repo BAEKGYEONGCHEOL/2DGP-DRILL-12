@@ -153,6 +153,7 @@ class Zombie:
 
     def run_away_boy(self, r=0.5):
         # 소년과 반대 방향으로 멀어지기
+        # 4방향으로 도망가기
         if common.boy.x < self.x and common.boy.y < self.y:
             self.move_little_to(self.x + 100, self.y + 100)
         elif common.boy.x >= self.x and common.boy.y < self.y:
